@@ -1,0 +1,1 @@
+docker run -t -i --rm -v /cubes/mcube-xyz/containers/app:/storage mnotest/test2:v1 -i

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Initialize our own variables:
+interactive=false
+
+while getopts ":i" opt; do
+    case "$opt" in
+    i)  interactive=true
+        ;;
+    \?)
+        ;;
+    esac
+done
+
+# Load environment variables
+if [ -d "/storage/env" ]; then
+  for f in "/storage/env/*" ; do
+    export $(cat $f | xargs) 
+  done
+fi
+
+# Setup the container
+/docker/entrypoint-setup
+
+# Run process
+if $interactive; then
+  /bin/bash
+else
+  /docker/entrypoint-run
+fi
