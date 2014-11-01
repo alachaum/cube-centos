@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Set the current docker group
+function nx-group() {
+  current_process_group=$1
+}
+
+# Run a process in background and prefix output with process name
+# e.g: 
+# nx-run "httpd -D FOREGROUND"
+function nx-run() {
+  real_group=$current_process_group
+  [ -z "$real_group" ] && real_group="System"
+  
+  (exec $1 2>&1 | sed -e "s/^/${real_group} | /" ) &
+}
+
+# Echo logs for specific process group
+function nx-log() {
+  real_group=$current_process_group
+  [ -z "$real_group" ] && real_group="System"
+  
+  (echo $1 | sed -e "s/^/${real_group} | /" ) &
+}

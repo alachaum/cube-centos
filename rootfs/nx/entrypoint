@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Load environment variables from filesystem
+if [ -d "/storage/env" ]; then
+  for f in "/storage/env/*" ; do
+    export $(cat $f | xargs)
+  done
+fi
+
+# Setup the container
+/nx/entrypoint-setup
+
+# Execute provided command
+exec "$@"

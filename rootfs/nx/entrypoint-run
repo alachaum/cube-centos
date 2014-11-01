@@ -1,0 +1,10 @@
+#!/bin/bash
+source /nx/entrypoint-setenv
+
+# Run apache
+nx-group "Apache"
+nx-log "Starting Apache"
+nx-run "httpd -D FOREGROUND"
+nx-run "tail -f /var/log/httpd/access_log /var/log/httpd/error_log"
+
+wait

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Setup Apache log folder
+mkdir -p /storage/logs/httpd
+rm -rf /var/log/httpd
+ln -s /storage/logs/httpd /var/log/httpd
+
+# Make sure logs exist and have the right permissions
+touch /var/log/httpd/error_log
+touch /var/log/httpd/access_log
+chown apache:apache -R /var/log/httpd

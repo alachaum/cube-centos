@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Run all setup scripts
+if [ -d "/nx/setup-scripts" ]; then
+  for f in "/nx/setup-scripts/*" ; do
+    /bin/bash $f
+  done
+fi
